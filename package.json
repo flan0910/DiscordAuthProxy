@@ -1,0 +1,14 @@
+{
+    "name": "AuthTom",
+    "version": "1.0.0",
+    "description": "Auth",
+    "author": "toms0910 <tomservs>",
+    "main": "main.js",
+    "scripts": {
+      "start": "node main.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1"
+      
+    }
+  }

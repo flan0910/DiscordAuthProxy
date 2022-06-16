@@ -1,0 +1,18 @@
+cookie:
+      httpOnly: true
+      secure: false
+      time: 1
+
+server:
+    host: '0.0.0.0'
+    port: 8080
+
+disauth:
+      id: '984457939291099137'
+      secret: '9BFdNF4VRLzgkasmY7Vd4Df0pM8qvr8G'
+      callback: 'http://localhost:8080/login/after'
+      guild_id: '941348795055218718'
+      roleid: '969243515857039420'
+
+proxy:
+      proxy_pass: 'http://localhost:8001'

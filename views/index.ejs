@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title><%- pagetitle %></title>
+        <style type="text/css"><%- include('css/styles.ejs') %></style>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="/Pages/top">Top</a>
+                <a href="/Pages/online">Online</a>
+                <a href="/Pages/banlist">Banlist</a>
+                <a href="/Pages/map">Map</a>
+                <% if(role === "true"){ %>
+                    <a href="/Pages/plan">Plan</a>
+                <% } %>
+            </nav>
+        </header>
+        <div>
+            <%- include('pages/'+ pages +'.ejs').replace(/(\s+)</g, "<").replace(/(\s+)>/g, ">") %>
+        </div>
+    </body>
+</html>
