@@ -23,7 +23,7 @@ router.get('/guilderror',(req,res) => {
             pages: "guilds",
         });//Guild Error
     }else{
-        res.redirect('/Pages?page=top');
+        res.redirect('/Pages/top');
     }
 });
 
