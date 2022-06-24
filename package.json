@@ -1,14 +1,19 @@
 {
-    "name": "AuthTom",
-    "version": "1.0.0",
-    "description": "Auth",
-    "author": "toms0910 <tomservs>",
-    "main": "main.js",
-    "scripts": {
-      "start": "node main.js"
-    },
-    "dependencies": {
-      "express": "^4.16.1"
-      
-    }
+  "name": "AuthTom",
+  "version": "1.0.0",
+  "description": "Auth",
+  "author": "toms0910 <tomservs>",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "http-proxy-middleware": "^2.0.6",
+    "js-yaml": "^4.1.0",
+    "morgan": "^1.10.0",
+    "snekfetch": "^4.0.4"
   }
+}
