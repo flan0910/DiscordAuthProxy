@@ -8,11 +8,11 @@ server:
     port: 8080
 
 disauth:
-      id: '989856922209493002'
-      secret: 'Juj7_lLGy4RifWsIGYv4QacrGi6jqFGX'
-      callback: 'http://localhost:8080/login/after'
-      guild_id: '941348795055218718'
-      roleid: '969243515857039420'
+      id: 'xxxxxxxxxxxxxxxxxxxx'
+      secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+      callback: 'http://xxx.xxx.xxx.xxx:8080/login/after'
+      guild_id: 'xxxxxxxxxxxxxxxxxxxx'
+      roleid: 'xxxxxxxxxxxxxxxxxxxx'
 
 proxy:
-      proxy_pass: 'http://localhost:8001'
+      proxy_pass: 'http://xxx.xxx.xxx.xxx:8001'
