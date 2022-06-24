@@ -85,4 +85,10 @@ router.get('/role',(req,res) => {
     }).then(e => console.log(e));
 });
 
+router.get('/logout',(req,res) => {
+    req.session.destroy((err => {
+        res.redirect('/');
+    }));
+});
+
 module.exports = router;

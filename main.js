@@ -2,7 +2,6 @@
 const express = require('express');
 const morgan = require("morgan");
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const cookieParser = require('cookie-parser'); 
 const session = require('express-session');
 const { exit } = require('process');
 
