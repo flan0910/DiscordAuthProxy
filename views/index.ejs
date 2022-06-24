@@ -3,23 +3,56 @@
     <head>
         <meta charset="UTF-8">
         <title><%- pagetitle %></title>
-        <style type="text/css"><%- include('css/styles.ejs') %></style>
+        <style type="text/css"><%- include('css/picocss.ejs') %></style>
+        <script><%- include('js/modal.ejs') %></script>
     </head>
     <body>
-        <header>
-            <nav>
-                <a href="/Pages/top">Top</a>
-                <a href="/Pages/online">Online</a>
-                <a href="/Pages/banlist">Banlist</a>
-                <a href="/Pages/map">Map</a>
-                <% if(role === "true"){ %>
-                    <a href="/Pages/plan">Plan</a>
-                <% } %>
-                <div class="end"><a href="/login/logout">Logout</a></div>
-            </nav>
-        </header>
-        <div>
-            <%- include('pages/'+ pages +'.ejs').replace(/(\s+)</g, "<").replace(/(\s+)>/g, ">") %>
-        </div>
-    </body>
+      <nav class="container-fluid" style="
+      background-color: var(--card-background-color);
+      box-shadow: var(--card-box-shadow)">
+        <ul>
+          <li><a class="contrast" href="/Pages/top">Top</a></li>
+          <li><a class="contrast" href="/Pages/online">Online</a></li>
+          <li><a class="contrast" href="/Pages/banlist">Banlist</a></li>
+          <li><a class="contrast" href="/Pages/map">Map</a></li>
+            <% if(role === "true"){ %>
+              <li><a class="contrast" href="/Pages/plan">Plan</a></li>
+            <% } %>
+        </ul>
+        <ul>
+          <li><a class="contrast" href="#" data-target="modal-logout"
+            onClick="toggleModal(event)">Logout</a></li>
+        </ul>
+      </nav>
+
+<dialog id="modal-logout">
+  <article>
+    <a href="#close"
+      aria-label="Close"
+      class="close"
+      data-target="modal-logout"
+      onClick="toggleModal(event)">
+    </a>
+    <h3>ログアウトしますか？</h3>
+    <p>
+      --------------------------------------------------
+    </p>
+    <footer>
+      <a href="#cancel"
+        role="button"
+        class="secondary"
+        data-target="modal-logout"
+        onClick="toggleModal(event)">
+        Cancel
+      </a>
+      <a
+        role="button"
+        href="/login/logout">
+        Logout
+      </a>
+    </footer>
+  </article>
+</dialog>
+<%- include('pages/'+ pages +'.ejs').replace(/(\s+)</g, "<").replace(/(\s+)>/g, ">") %>
+</body>
 </html>
