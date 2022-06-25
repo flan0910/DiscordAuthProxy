@@ -3,6 +3,8 @@ const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const session = require('express-session');
 const { exit } = require('process');
+const connectRedis = require('connect-redis');
+const Redis = require('ioredis')
 const fs = require('fs');
 
 function loadYamlFile(filename) {
@@ -29,7 +31,9 @@ try {
         callback: data.disauth.callback,
         guild_id: data.disauth.guild_id,
         roleid: data.disauth.roleid,
-        PROX_PATH: data.proxy.proxy_pass
+        PROX_PATH: data.proxy.proxy_pass,
+        Redis: data.redis.use,
+        RedisSet: data.redis.server
     }
 }catch (err){
     console.error(err.message);
@@ -37,17 +41,37 @@ try {
 }
 
 const crypto = require("crypto").randomBytes(256).toString("hex");
-app.use(session({
-    secret: crypto,
-    resave: false,
-    saveUninitialized: false,
-    cookie:{
-        httpOnly: conf.httpOnlySt,
-        secure: conf.secureSt,
-        maxAge: 86400000 * conf.sessiontime
-    }
-})); 
-
+if(conf.Redis == true){
+    try{
+        const RedisStore = connectRedis(session);
+        const redisClient = new Redis(conf.RedisSet);
+    
+        app.use(
+            session({
+            secret: crypto,
+            name: 'session', 
+            resave: false,
+            saveUninitialized: true,
+            cookie: {
+                httpOnly: conf.httpOnlySt,
+                secure: conf.secureSt,
+                maxAge: 86400000 * conf.sessiontime          },
+            store: new RedisStore({ client: redisClient }),
+            })
+        );
+    }catch(err){console.log(err);}
+}else{
+    app.use(session({
+        secret: crypto,
+        resave: false,
+        saveUninitialized: false,
+        cookie:{
+            httpOnly: conf.httpOnlySt,
+            secure: conf.secureSt,
+            maxAge: 86400000 * conf.sessiontime
+        }
+    })); 
+}
 
 // Logging
 app.use(require('./mod/logger'));
