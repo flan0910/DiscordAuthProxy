@@ -108,14 +108,7 @@ app.use('/Proxy/', createProxyMiddleware({
 }));
 
 // Start the Proxy
-const option = {
-    key: fs.readFileSync('./AuthKeys/private.key'),
-    cert: fs.readFileSync('./AuthKeys/server.crt'),
-    allowHTTP1: true
-}
-
-const server = require('http2').createSecureServer(option,app);
-server.listen(conf.PORT, conf.HOST, () => {
+app.listen(conf.PORT, conf.HOST, () => {
     console.log(`Starting Proxy at ${conf.HOST}:${conf.PORT}`);
     console.log('StartServer!');
 });
