@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 
 router.get('/*',(req,res,next) => {
     if(req.session.disauth == "true"){
@@ -14,6 +15,14 @@ router.get('/*',(req,res,next) => {
 });
 
 router.get('/',(req,res) => res.redirect('/top'));
+
+//favicon
+router.get('/favicon.ico', (req, res) => {
+    fs.readFile('./images/favicon.ico', (err, data) => {
+      res.type('ico');
+      res.send(data);
+    });
+});
 
 router.get('/top',(req,res) => {
     res.render('./index.ejs',{

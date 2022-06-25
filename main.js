@@ -15,8 +15,7 @@ function loadYamlFile(filename) {
 const app = express();
 app.set("view engine", "ejs");
 app.set('trust proxy', true);
-app.disable('x-powered-by');
-// Configuration
+app.disable('x-powered-by');// Configuration
 try {
     const data = loadYamlFile('./conf/config.yaml');
     global.conf = {
