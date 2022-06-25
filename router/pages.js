@@ -13,6 +13,8 @@ router.get('/*',(req,res,next) => {
     }
 });
 
+router.get('/',(req,res) => res.redirect('/top'));
+
 router.get('/top',(req,res) => {
     res.render('./index.ejs',{
         pagetitle: "Top Page",

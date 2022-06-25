@@ -75,6 +75,7 @@ router.get('/role',(req,res) => {
     fetch.get(`https://discordapp.com/api/v6/users/@me/guilds/${conf.guild_id}/member`)
     .set('Authorization', `Bearer ${req.query.token}`)
     .then(function (response){
+        req.session.name = `${response.body.nick}/${response.body.user.username}`;
         try{
             response.body.roles.filter(function (item){
                 if(item == conf.roleid){

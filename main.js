@@ -1,6 +1,5 @@
 //Modules
 const express = require('express');
-const morgan = require("morgan");
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const session = require('express-session');
 const { exit } = require('process');
@@ -107,6 +106,13 @@ app.use('/Proxy/', createProxyMiddleware({
     target: conf.PROX_PATH,
     changeOrigin:  true
 }));
+
+app.use((req, res) =>{
+    if(!req.path.match('/Proxy')){
+        res.status(404);
+        res.render('error/404');
+    }
+});
 
 // Start the Proxy
 app.listen(conf.PORT, conf.HOST, () => {
