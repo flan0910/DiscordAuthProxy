@@ -15,7 +15,8 @@ function loadYamlFile(filename) {
 // Create Express Server
 const app = express();
 app.set("view engine", "ejs");
-
+app.set('trust proxy', true);
+app.disable('x-powered-by');
 // Configuration
 try {
     const data = loadYamlFile('./conf/config.yaml');
@@ -51,7 +52,7 @@ app.use(session({
 
 
 // Logging
-app.use(morgan('common'));
+app.use(require('./mod/logger'));
 
 // app.get('/',(req,res) => {
 //     if(req.session.disauth == "true"){
