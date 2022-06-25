@@ -5,13 +5,15 @@
         <title><%- pagetitle %></title>
         <style type="text/css"><%- include('css/picocss.ejs') %></style>
         <script><%- include('js/modal.ejs') %></script>
+        <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     </head>
     <body>
-      <nav class="container-fluid" style="
+      <nav class="container-fluid" id="nav" style="
       background-color: var(--card-background-color);
       box-shadow: var(--card-box-shadow)">
         <ul>
           <li><a class="contrast" href="/top">Top</a></li>
+          <li><a class="contrast" href="/docs">Docs</a></li>
           <li><a class="contrast" href="/online">オンライン</a></li>
           <li><a class="contrast" href="/banlist">BANリスト</a></li>
           <li><a class="contrast" href="/map">Map</a></li>
@@ -54,5 +56,7 @@
   </article>
 </dialog>
 <%- include('pages/'+ pages +'.ejs').replace(/(\s+)</g, "<").replace(/(\s+)>/g, ">") %>
+<script><%- include('js/auto.js') %></script>
 </body>
 </html>
+

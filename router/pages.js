@@ -23,6 +23,14 @@ router.get('/top',(req,res) => {
     });
 });
 
+router.get('/docs',(req,res) => {
+    res.render('./index.ejs',{
+        pagetitle: "Docs Page",
+        pages: "docs",
+        role: req.session.disrole
+    });
+});
+
 router.get('/online',(req,res) => {
     res.render('./index.ejs',{
         pagetitle: "Online Page",
