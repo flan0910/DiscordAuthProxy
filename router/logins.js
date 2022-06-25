@@ -6,7 +6,7 @@ const fetch = require('snekfetch');
 router.get('/',(req,res) => {
     if (req.session.disauth == "true"){
         if (req.session.disguild == "true"){
-            res.redirect('/Pages/top');
+            res.redirect('/top');
         }
     }else{
         res.render('./login.ejs',{
@@ -23,7 +23,7 @@ router.get('/guilderror',(req,res) => {
             pages: "guilds",
         });//Guild Error
     }else{
-        res.redirect('/Pages/top');
+        res.redirect('/top');
     }
 });
 
@@ -64,7 +64,9 @@ router.get('/auth',(req,res) => {
             });
 
         }catch(err){}
-        res.redirect('/login/guilderror');
+        try {
+            res.redirect('/login/guilderror');
+        }catch(err){}
     }).catch(e => console.log(e));
 });
 
@@ -77,11 +79,13 @@ router.get('/role',(req,res) => {
             response.body.roles.filter(function (item){
                 if(item == conf.roleid){
                     req.session.disrole = "true";
-                    res.redirect('/Pages/top');
+                    res.redirect('/top');
                 }
             });
         }catch(err){}
-        res.redirect('/Pages/top');
+        try {
+            res.redirect('/top');
+        }catch(err){}
     }).then(e => console.log(e));
 });
 

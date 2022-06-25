@@ -4,9 +4,9 @@ const morgan = require("morgan");
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const session = require('express-session');
 const { exit } = require('process');
+const fs = require('fs');
 
 function loadYamlFile(filename) {
-    const fs = require('fs');
     const yaml = require('js-yaml');
     const yamlText = fs.readFileSync(filename, 'utf8')
     return yaml.load(yamlText);
@@ -53,21 +53,21 @@ app.use(session({
 // Logging
 app.use(morgan('common'));
 
-app.get('/',(req,res) => {
-    if(req.session.disauth == "true"){
-        if(req.session.disguild == "true"){
-            res.redirect('/Pages/top');
-        }
-    }else{
-        res.redirect('/login');
-    }
-});
+// app.get('/',(req,res) => {
+//     if(req.session.disauth == "true"){
+//         if(req.session.disguild == "true"){
+//             res.redirect('/Pages/top');
+//         }
+//     }else{
+//         res.redirect('/login');
+//     }
+// });
 
 //login
 app.use('/login',require('./router/logins'));
 
 //Pages/* sessionCheck
-app.use('/Pages',require('./router/pages'));
+app.use('/',require('./router/pages'));
 
 //Proxy/* sessionCheck
 app.use('/Proxy/*',(req,res,next) => {
@@ -108,7 +108,15 @@ app.use('/Proxy/', createProxyMiddleware({
 }));
 
 // Start the Proxy
-app.listen(conf.PORT, conf.HOST, () => {
+const option = {
+    key: fs.readFileSync('./AuthKeys/private.key'),
+    cert: fs.readFileSync('./AuthKeys/server.crt'),
+    allowHTTP1: true
+}
+
+const server = require('http2').createSecureServer(option,app);
+server.listen(conf.PORT, conf.HOST, () => {
     console.log(`Starting Proxy at ${conf.HOST}:${conf.PORT}`);
     console.log('StartServer!');
 });
+
